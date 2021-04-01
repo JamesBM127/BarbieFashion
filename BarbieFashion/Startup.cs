@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using BarbieFashion.Data;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using BarbieFashion.Services;
 
 namespace BarbieFashion
 {
@@ -31,6 +32,8 @@ namespace BarbieFashion
 
             services.AddDbContext<BarbieFashionContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<InfoModelService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

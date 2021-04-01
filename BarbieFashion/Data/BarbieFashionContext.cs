@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BarbieFashion.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,9 @@ namespace BarbieFashion.Data
             : base(options)
         {
         }
+
+        public DbSet<InfoModel> InfoModels { get; set; }
+        public DbSet<Parents> Parents { get; set; }
+        public DbSet<BarbieFashion.Models.Agency> Agency { get; set; }
     }
 }
