@@ -11,12 +11,33 @@ namespace BarbieFashion.Models
     {
         [Key]
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "{0} obrigatório")]
+        [Display(Name = "Nome Completo")]
+        [StringLength(50, MinimumLength = 10, ErrorMessage = "{0} deve ser maior que {2} e menor que {1} dígitos")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "{0} obrigatória")]
+        [Display(Name = "Idade")]
         public int Age { get; set; }
+
+        [Required(ErrorMessage = "{0} obrigatória")]
+        [Display(Name = "Cidade")]
         public string City { get; set; }
+
+        [Display(Name = "Trabalho em tempo integral")]
         public bool FullTimeJob { get; set; }
+
+        [Display(Name = "Trabalhar internacionalmente")]
         public bool InternationalWork { get; set; }
+
+        [Required(ErrorMessage = "{0} obrigatório")]
+        [Display(Name = "Telefone")]
+        [Phone]
         public string PhoneNumber { get; set; }
+
+        [Required(ErrorMessage = "{0} obrigatório")]
+        [EmailAddress(ErrorMessage = "Coloque um email válido")]
         public string Email { get; set; }
         public Parents Parents { get; set; }
         public Agency Agency { get; set; }
