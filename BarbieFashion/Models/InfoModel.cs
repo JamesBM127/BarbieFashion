@@ -40,9 +40,7 @@ namespace BarbieFashion.Models
         [EmailAddress(ErrorMessage = "Coloque um email válido")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "{0} obrigatório")]
-        [Display(Name = "Resumo de personalidade")]
-        [StringLength(1000, MinimumLength = 500, ErrorMessage = "{0} deve ser maior que {2} e menor que {1} dígitos")]
+
         public string Personality { get; set; }
         public Parents Parents { get; set; }
         public Agency Agency { get; set; }

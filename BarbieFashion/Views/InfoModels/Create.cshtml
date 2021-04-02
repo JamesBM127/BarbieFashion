@@ -4,13 +4,6 @@
     ViewData["Title"] = "Create";
 }
 
-<style>
-    input#personalityBox{
-        width: 800px;
-        height: 200px;
-    }
-</style>
-
 <h1>Create</h1>
 
 <h4>InfoModel</h4>
@@ -21,17 +14,17 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control" value="Jameson Martins"/>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Age" class="control-label"></label>
-                <input asp-for="Age" class="form-control" />
+                <input asp-for="Age" class="form-control" value="25"/>
                 <span asp-validation-for="Age" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
+                <input asp-for="City" class="form-control" value="Guajara"/>
                 <span asp-validation-for="City" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
@@ -46,17 +39,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="PhoneNumber" class="control-label"></label>
-                <input asp-for="PhoneNumber" class="form-control" />
+                <input asp-for="PhoneNumber" class="form-control" value="11122233333"/>
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <input asp-for="Email" class="form-control" value="james@gmail.com" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Personality" class="control-label"></label>
-                <input id="personalityBox" asp-for="Personality" class="form-control" />
+                <input asp-for="Personality" class="form-control" value="Lindo"/>
                 <span asp-validation-for="Personality" class="text-danger"></span>
             </div>
             <div class="form-group">

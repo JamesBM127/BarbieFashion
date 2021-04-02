@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BarbieFashion.Data;
 using BarbieFashion.Models;
+using BarbieFashion.Services.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace BarbieFashion.Services
@@ -29,6 +30,21 @@ namespace BarbieFashion.Services
 
         public async Task InsertAsync(InfoModel obj)
         {
+            //An error page is used to refuse the register of models out of the minimum and maximum age.
+            if (obj.Age < 15 || obj.Age > 23)
+            {
+                string message;
+                if (obj.Age < 15)
+                {
+                    message = "Mano, tu tem que ter pelo menos 15 anos pra se cadastrar";
+                }
+                else
+                {
+                    message = "Mano, tu ta velha demais pra cadastrar nessa agencia";
+                }
+                throw new IntegrityException(message);
+            }
+
             _barbieContext.Add(obj);
             await _barbieContext.SaveChangesAsync();
         }

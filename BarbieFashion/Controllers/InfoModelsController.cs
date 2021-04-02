@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using BarbieFashion.Data;
 using BarbieFashion.Models;
 using BarbieFashion.Services;
+using BarbieFashion.Services.Exceptions;
+using BarbieFashion.Models.ViewModels;
+using System.Diagnostics;
 
 namespace BarbieFashion.Controllers
 {
@@ -54,12 +57,20 @@ namespace BarbieFashion.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Age,City,FullTimeJob,InternationalWork,PhoneNumber,Email")] InfoModel infoModel)
+        public async Task<IActionResult> Create([Bind("Id,Name,Age,City,FullTimeJob,InternationalWork,PhoneNumber,Email,Personality")] InfoModel infoModel)
         {
             if (ModelState.IsValid)
             {
-                await _modelsService.InsertAsync(infoModel);
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    await _modelsService.InsertAsync(infoModel);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch(IntegrityException e)
+                {
+                    //This error means that the model is under 15 or over 23 years old.
+                    return RedirectToAction(nameof(Error), new { message = e.Message });
+                }
             }
             return View(infoModel);
         }
@@ -130,6 +141,16 @@ namespace BarbieFashion.Controllers
         {
             var infoModel = await _modelsService.FindByIdAsync(id);
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
         }
     }
 }
