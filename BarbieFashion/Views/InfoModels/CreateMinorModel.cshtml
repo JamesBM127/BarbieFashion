@@ -8,9 +8,77 @@
 
 <h4>Parents</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateMinorModel">
+
+<form asp-action="CreateMinorModel">
+    <div>
+        <h4>InfoModel</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.InfoModel.Id)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.InfoModel.Id)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.InfoModel.Name)
+            </dt>
+            <dd class="col-sm-10">
+                <input asp-for="InfoModel.Name" value="@Model.InfoModel.Name" />
+                <span asp-validation-for="InfoModel.Name"></span>
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.InfoModel.Age)
+            </dt>
+            <dd class="col-sm-10">
+                <input asp-for="InfoModel.Age" value="@Model.InfoModel.Age" />
+                <span asp-validation-for="InfoModel.Age"></span>
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.InfoModel.City)
+            </dt>
+            <dd class="col-sm-10">
+                <input asp-for="InfoModel.City" value="@Model.InfoModel.City" />
+                <span asp-validation-for="InfoModel.City"></span>
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.InfoModel.FullTimeJob)
+            </dt>
+            <dd class="col-sm-10">
+                <input class="form-check-input" asp-for="InfoModel.FullTimeJob" />
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.InfoModel.InternationalWork)
+            </dt>
+            <dd class="col-sm-10">
+                <input class="form-check-input" asp-for="InfoModel.FullTimeJob" />
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.InfoModel.PhoneNumber)
+            </dt>
+            <dd class="col-sm-10">
+                <input asp-for="InfoModel.PhoneNumber" value="@Model.InfoModel.PhoneNumber" />
+                <span asp-validation-for="InfoModel.PhoneNumber"></span>
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.InfoModel.Email)
+            </dt>
+            <dd class="col-sm-10">
+                <input asp-for="InfoModel.Email" value="@Model.InfoModel.Email" />
+                <span asp-validation-for="InfoModel.Email"></span>
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.InfoModel.Personality)
+            </dt>
+            <dd class="col-sm-10">
+                <input asp-for="InfoModel.Personality" value="@Model.InfoModel.Personality" />
+                <span asp-validation-for="InfoModel.Personality"></span>
+            </dd>
+        </dl>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Parents.Name" class="control-label"></label>
@@ -25,70 +93,9 @@
             <div class="form-group">
                 <input asp-route-id="@Model.InfoModel.Id" type="submit" value="Create" class="btn btn-primary" />
             </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <h4>InfoModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.InfoModel.Id)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.InfoModel.Id)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.InfoModel.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.InfoModel.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.InfoModel.Age)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.InfoModel.Age)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.InfoModel.City)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.InfoModel.City)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.InfoModel.FullTimeJob)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.InfoModel.FullTimeJob)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.InfoModel.InternationalWork)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.InfoModel.InternationalWork)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.InfoModel.PhoneNumber)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.InfoModel.PhoneNumber)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.InfoModel.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.InfoModel.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.InfoModel.Personality)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.InfoModel.Personality)
-        </dd>
-    </dl>
-</div>
+</form>
 
 <div>
     <a asp-action="Index">Back to List</a>

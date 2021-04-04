@@ -63,7 +63,7 @@ namespace BarbieFashion.Controllers
             {
                 if (infoModel.Age >= 15 && infoModel.Age < 18)
                 {
-                    await _modelsService.InsertAsync(infoModel);
+                    //await _modelsService.InsertAsync(infoModel);
                     return RedirectToAction(nameof(CreateMinorModel), infoModel);
                 }
                 try
@@ -156,11 +156,12 @@ namespace BarbieFashion.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateMinorModel(Parents parents, int? id)
+        public async Task<IActionResult> CreateMinorModel(InfoModelViewModel viewModel, int? id)
         {
             //TA DANDO ERRO PORQUE NÃO DA PRA CRIAR OS PAIS DE UMA MODELO QUE AINDA NÃO EXISTE NO BANCO DE DADOS.
-            InfoModel infoModel = await _modelsService.FindByIdAsync(id.Value);
-            await _modelsService.InsertParentsAsync(parents, infoModel);
+            InfoModel model = viewModel.InfoModel;
+            model.Parents = viewModel.Parents;
+            await _modelsService.InsertAsync(model);
             return RedirectToAction(nameof(Index));
         }
 
