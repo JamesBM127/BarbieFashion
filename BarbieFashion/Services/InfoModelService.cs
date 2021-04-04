@@ -25,7 +25,19 @@ namespace BarbieFashion.Services
 
         public async Task<InfoModel> FindByIdAsync(int id)
         {
-            return await _barbieContext.InfoModels.Include(obj => obj.Agency).FirstOrDefaultAsync(obj => obj.Id == id);
+            return await _barbieContext.InfoModels.Include(obj => obj.Agency)
+                .FirstOrDefaultAsync(obj => obj.Id == id);
+        }
+
+        public async Task<Parents> FindParentsByIdAsync(int id)
+        {
+            return await _barbieContext.Parents.Include(obj => obj.InfoModel)
+                .FirstOrDefaultAsync(obj => obj.Id == id);
+        }
+
+        private InfoModel FindById(int id)
+        {
+            return  _barbieContext.InfoModels.Include(obj => obj.Agency).FirstOrDefault(obj => obj.Id == id);
         }
 
         public async Task InsertAsync(InfoModel obj)
@@ -79,6 +91,17 @@ namespace BarbieFashion.Services
             {
                 return;
             }
+        }
+
+        public async Task InsertParentsAsync(Parents parents, InfoModel infoModel)
+        {
+            infoModel.Parents = parents;
+            await UpdateAsync(infoModel);
+        }
+
+        public void InsertModelWithoutSave(InfoModel model)
+        {
+            _barbieContext.InfoModels.Add(model);
         }
     }
 }

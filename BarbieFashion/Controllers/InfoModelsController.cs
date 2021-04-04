@@ -39,14 +39,14 @@ namespace BarbieFashion.Controllers
             {
                 return NotFound();
             }
-
-            var infoModel = await _modelsService.FindByIdAsync(id.Value);
+            InfoModel infoModel = await _modelsService.FindByIdAsync(id.Value);
+            Parents parents = await _modelsService.FindParentsByIdAsync(infoModel.Id);
             if (infoModel == null)
             {
                 return NotFound();
             }
-
-            return View(infoModel);
+            InfoModelViewModel viewModel = new InfoModelViewModel { InfoModel = infoModel, Parents = parents };
+            return View(viewModel);
         }
 
         // GET: InfoModels/Create
@@ -61,12 +61,17 @@ namespace BarbieFashion.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (infoModel.Age >= 15 && infoModel.Age < 18)
+                {
+                    await _modelsService.InsertAsync(infoModel);
+                    return RedirectToAction(nameof(CreateMinorModel), infoModel);
+                }
                 try
                 {
                     await _modelsService.InsertAsync(infoModel);
                     return RedirectToAction(nameof(Index));
                 }
-                catch(IntegrityException e)
+                catch (IntegrityException e)
                 {
                     //This error means that the model is under 15 or over 23 years old.
                     return RedirectToAction(nameof(Error), new { message = e.Message });
@@ -94,7 +99,7 @@ namespace BarbieFashion.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Age,City,FullTimeJob,InternationalWork,PhoneNumber,Email")] InfoModel infoModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Age,City,FullTimeJob,InternationalWork,PhoneNumber,Email,Personality")] InfoModel infoModel)
         {
             if (id != infoModel.Id)
             {
@@ -140,6 +145,22 @@ namespace BarbieFashion.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var infoModel = await _modelsService.FindByIdAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult CreateMinorModel(InfoModel infoModel)
+        {
+            InfoModelViewModel viewModel = new InfoModelViewModel { InfoModel = infoModel };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateMinorModel(Parents parents, int? id)
+        {
+            //TA DANDO ERRO PORQUE NÃO DA PRA CRIAR OS PAIS DE UMA MODELO QUE AINDA NÃO EXISTE NO BANCO DE DADOS.
+            InfoModel infoModel = await _modelsService.FindByIdAsync(id.Value);
+            await _modelsService.InsertParentsAsync(parents, infoModel);
             return RedirectToAction(nameof(Index));
         }
 

@@ -1,15 +1,44 @@
 ﻿@model BarbieFashion.Models.ViewModels.InfoModelViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "CreateMinorModel";
 }
 
-<h1>Details</h1>
+<h1>CreateMinorModel</h1>
+
+<h4>Parents</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateMinorModel">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Parents.Name" class="control-label"></label>
+                <input asp-for="Parents.Name" class="form-control" value="Marinete" />
+                <span asp-validation-for="Parents.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Parents.Age" class="control-label"></label>
+                <input asp-for="Parents.Age" class="form-control" value="40" />
+                <span asp-validation-for="Parents.Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-route-id="@Model.InfoModel.Id" type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
 
 <div>
     <h4>InfoModel</h4>
     <hr />
     <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.InfoModel.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.InfoModel.Id)
+        </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.InfoModel.Name)
         </dt>
@@ -58,27 +87,13 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.InfoModel.Personality)
         </dd>
-
-        @{
-            if (Model.InfoModel.Age < 18)
-            {
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Parents.Name)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Parents.Name)
-                </dd>
-                <dt class="col-sm-2">
-                    @Html.DisplayNameFor(model => model.Parents.Age)
-                </dt>
-                <dd class="col-sm-10">
-                    @Html.DisplayFor(model => model.Parents.Age)
-                </dd>
-            }
-        }
     </dl>
 </div>
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.InfoModel.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
