@@ -31,7 +31,7 @@ namespace BarbieFashion
             services.AddControllersWithViews();
 
             services.AddDbContext<BarbieFashionContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlServer(Configuration.GetConnectionString("BarbieFashionContext")));
 
             services.AddScoped<InfoModelService>();
         }
